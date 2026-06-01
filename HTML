@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- Linha 1: Define que este é um documento HTML5 moderno -->
+<html lang="pt-br">
+<!-- Linha 2: Início do corpo da página, define o idioma como português do Brasil -->
+
+<head>
+    <!-- Linha 3: Cabeçalho técnico (metadados), não aparece visualmente na página -->
+    <meta charset="UTF-8">
+    <!-- Linha 4: Garante que acentos (ã, é, ç) apareçam corretamente -->
+    
+    <title>Simulador Agrinho - Economia de Água</title>
+    <!-- Linha 5: Título que aparece na aba do navegador -->
+
+    <style>
+        /* Linha 6: Início do CSS (estilo visual da página) */
+        
+        body {
+            /* Linha 7: Estiliza o corpo principal da página */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Linha 8: Define a fonte do texto para uma leitura agradável */
+            
+            background-color: #f0f8ff;
+            /* Linha 9: Cor de fundo azul bem clarinho (AliceBlue) */
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* Linhas 10-12: Centraliza o conteúdo exatamente no meio da tela */
+        }
+
+        .cartao {
+            /* Linha 13: Cria uma classe chamada 'cartao' para nossa caixa principal */
+            background-color: white;
+            /* Linha 14: Fundo branco para destacar o conteúdo */
+            
+            padding: 30px;
+            /* Linha 15: Espaçamento interno de 30 pixels para não ficar apertado */
+            
+            border-radius: 15px;
+            /* Linha 16: Bordas arredondadas para um visual moderno e amigável */
+            
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            /* Linha 17: Sombra suave atrás do cartão para dar efeito 3D */
+            
+            width: 350px;
+            /* Linha 18: Largura fixa de 350 pixels */
+            
+            text-align: center;
+            /* Linha 19: Centraliza todo o texto e botões dentro do cartão */
+        }
+
+        h1 {
+            /* Linha 20: Estiliza o título principal (h1) */
+            color: #2e7d32;
+            /* Linha 21: Cor verde escuro, remetendo ao campo/agro */
+            
+            font-size: 24px;
+            /* Linha 22: Tamanho da fonte do título */
+        }
+
+        label {
+            /* Linha 23: Estiliza os rótulos (perguntas) dos campos */
+            display: block;
+            /* Linha 24: Faz cada label ocupar uma linha inteira */
+            
+            margin-top: 15px;
+            /* Linha 25: Espaço de 15px acima de cada pergunta */
+            
+            color: #555;
+            /* Linha 26: Cor cinza escuro para o texto das perguntas */
+        }
+
+        input {
+            /* Linha 27: Estiliza as caixas onde o usuário digita */
+            width: 90%;
+            /* Linha 28: Ocupa 90% da largura do cartão */
+            
+            padding: 10px;
+            /* Linha 29: Espaço interno para o texto não colar na borda */
+            
+            margin-top: 5px;
+            /* Linha 30: Pequeno espaço entre a pergunta e a caixa */
+            
+            border: 1px solid #ccc;
+            /* Linha 31: Borda fina e cinza clara */
+            
+            border-radius: 5px;
+            /* Linha 32: Bordas da caixa de texto levemente arredondadas */
+        }
+
+        button {
+            /* Linha 33: Estiliza o botão de calcular */
+            background-color: #4caf50;
+            /* Linha 34: Cor de fundo verde vibrante (verde folha) */
+            
+            color: white;
+            /* Linha 35: Texto do botão na cor branca */
+            
+            border: none;
+            /* Linha 36: Remove a borda padrão do botão */
+            
+            padding: 12px 20px;
+            /* Linha 37: Tamanho do botão (altura e largura interna) */
+            
+            margin-top: 20px;
+            /* Linha 38: Espaço acima do botão para separar dos campos */
+            
+            border-radius: 5px;
+            /* Linha 39: Bordas do botão arredondadas */
+            
+            cursor: pointer;
+            /* Linha 40: Muda o mouse para uma "mãozinha" quando passa por cima */
+            
+            font-size: 16px;
+            /* Linha 41: Tamanho da letra dentro do botão */
+        }
+
+        button:hover {
+            /* Linha 42: Efeito quando o mouse passa por cima do botão */
+            background-color: #45a049;
+            /* Linha 43: Escurece um pouco o verde para indicar interação */
+        }
+
+        #resultado {
+            /* Linha 44: Estiliza a área onde aparecerá a resposta */
+            margin-top: 20px;
+            /* Linha 45: Espaço acima do resultado */
+            
+            padding: 15px;
+            /* Linha 46: Espaço interno na área de resposta */
+            
+            background-color: #e8f5e9;
+            /* Linha 47: Fundo verde muito claro para destacar a resposta */
+            
+            border-radius: 5px;
+            /* Linha 48: Bordas arredondadas na área de resposta */
+            
+            display: none;
+            /* Linha 49: Começa escondido (só aparece depois de calcular) */
+        }
+    </style>
+    <!-- Linha 50: Fim do estilo CSS -->
+</head>
+
+<body>
+    <!-- Linha 51: Início do corpo visível da página -->
+
+    <div class="cartao">
+        <!-- Linha 52: Cria uma divisão (caixa) com a classe 'cartao' definida no CSS -->
+        
+        <h1>🌾 Simulador Agrinho</h1>
+        <!-- Linha 53: Título principal da página com emoji de planta -->
+
+        <p>Tecnologia e Sustentabilidade no Campo</p>
+        <!-- Linha 54: Subtítulo explicativo -->
+
+        <label for="aguaTradicional">Consumo tradicional (Litros/hectare):</label>
+        <!-- Linha 55: Rótulo da primeira pergunta -->
+        
+        <input type="number" id="aguaTradicional" placeholder="Ex: 2000">
+        <!-- Linha 56: Caixa de entrada numérica. 'id' é o nome para o código achar -->
+
+        <label for="percentual">Economia com Gotejamento (%):</label>
+        <!-- Linha 57: Rótulo da segunda pergunta -->
+        
+        <input type="number" id="percentual" placeholder="Ex: 40">
+        <!-- Linha 58: Caixa de entrada para a porcentagem -->
+
+        <button onclick="calcularEconomia()">Calcular Economia</button>
+        <!-- Linha 59: Botão que, ao ser clicado, executa a função 'calcularEconomia' -->
+
+        <div id="resultado">
+            <!-- Linha 60: Div vazia que receberá o resultado do cálculo -->
+            <p id="textoResultado"></p>
+            <!-- Linha 61: Parágrafo onde o texto final será inserido pelo JavaScript -->
+        </div>
+    </div>
+    <!-- Linha 62: Fim da caixa 'cartao' -->
+
+    <script>
+        // Linha 63: Início do JavaScript (a lógica/cérebro da página)
+
+        function calcularEconomia() {
+            // Linha 64: Cria uma função chamada 'calcularEconomia'
+            
+            let agua = document.getElementById('aguaTradicional').value;
+            // Linha 65: Pega o valor digitado no primeiro campo e guarda em 'agua'
+            
+            let perc = document.getElementById('percentual').value;
+            // Linha 66: Pega o valor digitado no segundo campo e guarda em 'perc'
+
+            if (agua === "" || perc === "") {
+                // Linha 67: Verifica se algum dos campos está vazio
+                
+                alert("Por favor, preencha todos os campos!");
+                // Linha 68: Mostra um alerta na tela se estiver vazio
+                
+                return;
+                // Linha 69: Interrompe a função aqui se houver erro
+            }
+
+            // Linha 70: Converte os textos para números decimais (parseFloat)
+            let valorAgua = parseFloat(agua);
+            let valorPerc = parseFloat(perc);
+
+            let economia = valorAgua * (valorPerc / 100);
+            // Linha 71: Calcula quantos litros serão economizados
+            
+            let novoConsumo = valorAgua - economia;
+            // Linha 72: Calcula quanto restará de consumo
+
+            let divResultado = document.getElementById('resultado');
+            // Linha 73: Seleciona a caixa de resultado (que estava escondida)
+            
+            let txtResultado = document.getElementById('textoResultado');
+            // Linha 74: Seleciona o parágrafo dentro da caixa de resultado
+
+            divResultado.style.display = 'block';
+            // Linha 75: Torna a caixa de resultado visível (display block)
+
+            txtResultado.innerHTML = `
+                <!-- Linha 76: Insere o texto formatado dentro do parágrafo -->
+                <strong>💧 Resultado da Simulação:</strong><br><br>
+                Consumo original: ${valorAgua.toFixed(0)} L/ha<br>
+                Novo consumo: ${novoConsumo.toFixed(0)} L/ha<br>
+                <span style="color: green; font-weight: bold;">
+                Economia: ${economia.toFixed(0)} Litros por hectare!
+                </span><br><br>
+                <em>"Inovação no campo preserva recursos e garante o futuro do Paraná!"</em>
+            `;
+            // Linha 77: Usa template string (crases) para montar o texto com os valores
+            // toFixed(0) arredonda para não mostrar vírgulas desnecessárias
+        }
+        // Linha 78: Fim da função calcularEconomia
+    </script>
+    <!-- Linha 79: Fim do JavaScript -->
+
+</body>
+<!-- Linha 80: Fim do corpo da página -->
+</html>
+<!-- Linha 81: Fim do documento HTML -->
